@@ -33,9 +33,10 @@ public class Main {
          //output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
 
          if(HttpRequest[1].equals("/")){
-             output.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
-         }else{
              output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+
+         }else{
+             output.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
          }
 
 
