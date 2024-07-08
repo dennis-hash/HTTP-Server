@@ -12,7 +12,7 @@ public class Main {
 
      ServerSocket serverSocket = null;
      Socket clientSocket = null;
-     DataOutputStream out = null;
+     //DataOutputStream out = null;
      Map<String, String> httpRequest = new HashMap<>();
 
      try {
@@ -32,25 +32,25 @@ public class Main {
          parseRequest(httpRequest, textAsBytes);
 
          if ("/".equals(httpRequest.get("target"))) {
-             out.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
+             clientSocket.getOutputStream().write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
          } else if (httpRequest.get("target").startsWith("/echo/")) {
              String queryParam = httpRequest.get("target").split("/")[2];
-             out.write(
+             clientSocket.getOutputStream().write(
                      ("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: " +
                              queryParam.length() + "\r\n\r\n" + queryParam)
                              .getBytes());
          } else {
-             out.write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
+             clientSocket.getOutputStream().write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
          }
-         out.flush();
+         clientSocket.getOutputStream().flush();
          //System.out.println("accepted new connection");
 
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
      }finally {
-         if (out != null) {
-             out.close();
-         }
+//         if (out != null) {
+//             out.close();
+//         }
      }
   }
 
