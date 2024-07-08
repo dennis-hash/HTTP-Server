@@ -20,7 +20,7 @@ public class Main {
 
        serverSocket.setReuseAddress(true);
        clientSocket = serverSocket.accept();
-       System.out.println("accepted new connection");
+       //System.out.println("accepted new connection");
 
 
 
