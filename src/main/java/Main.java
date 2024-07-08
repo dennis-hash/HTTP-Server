@@ -39,11 +39,17 @@ public class Main {
                      ("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: " +
                              queryParam.length() + "\r\n\r\n" + queryParam)
                              .getBytes());
+         } else if (httpRequest.get("target").equals("/user-agent")) {
+             String queryParam = httpRequest.get("userAgent");
+             clientSocket.getOutputStream().write(
+                     ("HTTP/1.1 200 OK\r\nContent-Type: text/plain\r\nContent-Length: " +
+                             queryParam.length() + "\r\n\r\n" + queryParam)
+                             .getBytes());
          } else {
              clientSocket.getOutputStream().write("HTTP/1.1 404 Not Found\r\n\r\n".getBytes());
          }
          clientSocket.getOutputStream().flush();
-         //System.out.println("accepted new connection");
+         System.out.println("accepted new connection" + httpRequest.get("userAgent"));
 
      } catch (IOException e) {
        System.out.println("IOException: " + e.getMessage());
@@ -59,6 +65,7 @@ public class Main {
       String s = new String(text);
       String[] requestSplit = s.split("\r\n");
       parseRequestLine(ret, requestSplit[0]);
+      parseUserAgent(ret, requestSplit[3]);
    }
 
     private static void parseRequestLine(Map<String, String> ret, String s) {
@@ -66,5 +73,10 @@ public class Main {
         ret.put("method", requestLineSplit[0].trim());
         ret.put("target", requestLineSplit[1].trim());
         ret.put("version", requestLineSplit[2].trim());
+    }
+
+    private static void parseUserAgent(Map<String, String> ret, String s){
+        String[] userAgent = s.split(" ");
+        ret.put("userAgent", userAgent[1].trim());
     }
 }
