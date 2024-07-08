@@ -65,7 +65,7 @@ public class Main {
       String s = new String(text);
       String[] requestSplit = s.split("\r\n");
       parseRequestLine(ret, requestSplit[0]);
-      parseUserAgent(ret, requestSplit[3]);
+      parseUserAgent(ret, requestSplit[2]);
    }
 
     private static void parseRequestLine(Map<String, String> ret, String s) {
