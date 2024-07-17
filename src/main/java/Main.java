@@ -85,7 +85,7 @@ class ClientHandler implements Runnable {
         for (int i = 1; i < requestLines.length; i++) {
             String[] hlLine = requestLines[i].split(":");
             headers.put(hlLine[0].strip(), hlLine[1].strip());
-            //h
+
         }
         request.setHeaders(headers);
         return request;
