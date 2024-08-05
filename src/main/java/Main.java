@@ -23,6 +23,8 @@ public class Main {
                   Socket clientSocket = serverSocket.accept();
                   System.out.println("New client connected");
                   executor.execute(new ClientHandler(clientSocket));
+
+                  ///
               }
           } catch (IOException e) {
               System.out.println("IOException: " + e.getMessage());
